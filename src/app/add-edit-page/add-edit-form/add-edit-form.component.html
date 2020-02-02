@@ -1,0 +1,67 @@
+<p>add-edit-form works!</p>
+
+<p-panel header="SavePanel">
+    <form [formGroup]="myForm" (ngSubmit)="submit(myForm.getRawValue())">
+        <div class="p-grid">
+            <div class="p-col-2">
+                <label for="department">Department</label>
+            </div>
+            <div class="p-col-10">
+                <p-dropdown id="department" [options]="departmentList" optionLabel="departmentName"
+                    placeholder="Select a Department" [showClear]="true" dataKey="departmentCode"
+                    formControlName="department"></p-dropdown>
+            </div>
+            <ng-container *ngIf="!!departmentSelected">
+                <div class="p-col-2"><label>DepartmentCode</label></div>
+                <div class="p-col-10">
+                    <input type="text" pInputText [value]="departmentSelected?.departmentCode" [disabled]="true" />
+                    <!-- {{departmentSelected | json}} -->
+
+                </div>
+            </ng-container>
+        </div>
+
+        <div class="p-grid">
+            <div class="p-col-2"><label for="first">gender</label></div>
+
+            <div class="p-col-10">
+                <ng-container *ngFor="let item of genderList">
+                    <p-radioButton name="gender" [value]="item.value" [label]="item.label"
+                        [style]="{ 'margin-left': '10px' }" formControlName="gender"></p-radioButton>
+                </ng-container>
+            </div>
+        </div>
+
+        <div class="p-grid">
+            <div class="p-col-2"><label for="firstName">firstName</label></div>
+            <div class="p-col-10">
+                <input id="firstName" type="text" pInputText formControlName="firstName" />
+                {{myForm.get('firstName').errors|json}}
+                <div style="color:red"
+                    *ngIf="myForm.get('firstName').touched && myForm.get('firstName').hasError('required')">
+                    Oops, firstName is required
+                </div>
+            </div>
+        </div>
+
+        <div class="p-grid">
+            <div class="p-col-2"><label for="lastName">lastName</label></div>
+            <div class="p-col-10">
+                <input id="lastName" type="text" pInputText formControlName="lastName" />
+                <div style="color:red"
+                    *ngIf="myForm.get('lastName').touched && myForm.get('lastName').hasError('required')">
+                    Oops, lastName is required
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="ui-g">
+                <div class="ui-g-4"></div>
+                <p-button label="Save" type="submit"></p-button>
+                <div class="ui-g-1"></div>
+                <p-button label="Back" [routerLink]="['/search']"></p-button>
+            </div>
+        </div>
+    </form>
+    {{ myForm.value | json }}
+</p-panel>

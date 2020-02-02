@@ -1,0 +1,15 @@
+<p>first works!</p>
+<p>name:{{name}}</p>
+<input type="text" pInputText />
+<br>
+ngmodel
+<input type="text" pInputText [(ngModel)]="name"/>
+
+<br><br>
+Number
+<input type="text" pInputText [value]="num"/>
+<button type="button" pButton label="+" (click)="plus($event)"></button>
+
+<button type="button" pButton label="-" (click)="minus($event)"></button>
+
+

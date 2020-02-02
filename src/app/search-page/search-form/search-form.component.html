@@ -1,0 +1,74 @@
+<p>search-form works!</p>
+<p-panel header="searchPanel">
+    <div class="p-grid">
+        <div class="p-col-2">     
+    <label for="department">Department</label>
+</div>
+<div class="p-col-10">
+        <p-dropdown
+            id="department"
+            [options]="departmentList"
+            optionLabel="departmentName"
+            placeholder="Select a Department"
+            [(ngModel)]="departmentSelected"
+            [showClear]="true"
+          ></p-dropdown>
+</div>
+<ng-container  *ngIf="!!departmentSelected">
+                <div class="p-col-2"><label >DepartmentCode</label>
+                </div>
+                <div class="p-col-10">
+                  <input
+                    type="text"
+                    pInputText
+                    [value]="departmentSelected?.departmentCode"
+                    [disabled]="true"
+                  />
+                  <!-- {{departmentSelected | json}} -->
+                </div>
+              </ng-container>
+     </div>
+         
+          
+          <div class="p-grid">
+          <div class="p-col-2"> <label for="first">gender</label>
+        </div>
+        <div class="p-col-10">
+          <ng-container *ngFor="let item of genderList">
+                <p-radioButton
+                name="gender"
+                [value]="item.value"
+                [label]="item.label"
+                [style]="{'margin-left': '10px'}"
+                [(ngModel)]="genderSelected"
+              ></p-radioButton>
+            </ng-container>
+        </div>
+            </div>
+              
+            
+              <div class="p-grid">
+              <div class="p-col-2"><label for="firstName">firstName</label>
+            </div>
+            <div class="p-col-10">  
+    <input 
+    id="firstName" type="text" pInputText [(ngModel)]="firstName" />
+            </div>
+</div>
+    
+     
+    <div class="p-grid">
+    <div class="p-col-2"><label for="lastName">lastName</label>
+    </div>
+        <div class="p-col-10">
+    <input id="lastName" type="text"  pInputText [(ngModel)]="lastName" />
+     </div>
+</div>
+
+        <p-button  label="Add"(click)="addClick($event)"></p-button>
+
+        <p-button  label="Search"(click)="searchClick($event)"></p-button>
+        <p-button  label="GotoAdd"(click)="gotoAdd($event)"></p-button>
+        
+
+</p-panel>
